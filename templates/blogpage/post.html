@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+<head>
+    <meta charset="UTF-8">
+    <title>Posts</title>
+</head>
+{% block content %}
+<body>
+{% if object %}
+{{ object.message|safe }}
+{% endif %}
+
+</body>
+{% endblock %}

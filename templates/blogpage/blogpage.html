@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+<head>
+    <meta charset="UTF-8">
+    <title>Posts</title>
+</head>
+{% block content %}
+<body>
+<div class="column">
+{% for object in object_list %}
+<a href="#">{{ object.user }}</a>
+<a href="{% url 'post' object.slug %}">{{ object.theme }}</a>
+{{ object.time_post }}
+<br>
+{{ object.message | safe }}
+<hr>
+{% endfor %}
+</div>
+</body>
+{% endblock %}
