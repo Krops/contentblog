@@ -6,7 +6,7 @@ from .forms import PostForm
 from django.http import HttpResponseRedirect
 
 from django.contrib import auth
-
+from django.db import IntegrityError
 
 class PostView(DetailView):
     model = Post
@@ -24,21 +24,18 @@ class BlogView(ListView):
 class AddView(FormView):
     form_class = PostForm
     template_name = 'blogpage/add.html'
-    success_url = "/"
+    success_url = "add_post"
 
     def form_valid(self, form):
-        print("form valid")
-        post = form.get_slugified()
-        post.user = auth.get_user(self.request)
-        post.save()
-        self.slug = post.slug
-        return super().form_valid(form)
-
-
-    def form_invalid(self, form):
-        print("form invalid")
-        print(form._errors)
-        return HttpResponseRedirect(self.success_url)
+        try:
+            post = form.get_slugified()
+            post.user = auth.get_user(self.request)
+            post.save()
+            self.slug = post.slug
+            return super().form_valid(form)
+        except IntegrityError:
+            form.add_error('theme', 'Such theme is exist')
+            return self.form_invalid(form)
 
     def get_success_url(self):
         return reverse('post', args=(self.slug,))

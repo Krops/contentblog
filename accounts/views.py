@@ -26,7 +26,7 @@ def signin(request):
             login(request, user)
             if 'next' in request.POST:
                 return redirect(request.POST['next'])
-            return redirect('home')
+            return redirect('blog')
         else:
             return render(request, 'accounts/login.html', {'error': 'Passwords or user didn\'t match'})
     else:
@@ -35,4 +35,4 @@ def signin(request):
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('home')
+        return redirect('blog')

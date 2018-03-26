@@ -6,14 +6,14 @@
 {% block content %}
 <body>
 <div class="column">
-{% for object in object_list %}
-<a href="#">{{ object.user }}</a>
-<a href="{% url 'post' object.slug %}">{{ object.theme }}</a>
-{{ object.time_post }}
-<br>
-{{ object.message | safe }}
-<hr>
-{% endfor %}
+    {% for object in object_list %}
+    <a href="{% url 'post' object.slug %}">{{ object.theme }}</a>
+    posted by <a href="#">{{ object.user }}</a>
+    <span class="post-date">at {{ object.time_post }}</span>
+    <br>
+    {{ object.message | safe }}
+    <hr>
+    {% endfor %}
 </div>
 </body>
 {% endblock %}

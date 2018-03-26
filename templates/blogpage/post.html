@@ -6,6 +6,8 @@
 {% block content %}
 <body>
 {% if object %}
+<h1>{{ object.theme }}</h1>
+<hr>
 {{ object.message|safe }}
 {% endif %}
 

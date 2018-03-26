@@ -17,8 +17,19 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
+       <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a class="nav-link" href="{% url 'add_post' %}">Add Post</a></li>
+                {% if user.is_authenticated %}
+                <li class="nav-item active"><a class="nav-link" href="#" onclick="document.getElementById('logout_form').submit()">Logout</a></li>
+                <form id="logout_form" method="post" action="{% url 'accounts:logout' %}">
+                    {% csrf_token %}
+                    <input type="hidden">
+                </form>
+                {% else %}
+                <li class="nav-item active"><a class="nav-link" href="{% url 'accounts:signup' %}">Registration</a></li>
+                <li class="nav-item active"><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>

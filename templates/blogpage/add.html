@@ -10,37 +10,13 @@
 {% load static %}
 <form action="add_post" method="post">
     {% csrf_token %}
-    {{ form.rate }}
-    <hr>
-    {{ form.slug }}
-    <hr>
-    {{ form.theme }}
-    <hr>
+    {{ form.theme.name }}: {{ form.theme }}
+    {{ form.theme.errors }}
     <hr>
     {{ form.message }}
     <hr>
-    {{ form.user }}
-    <hr>
-    {{ form.rate }}
-    <hr>
     <input type="submit" value="Submit"/>
 </form>
-<hr>
-{% if errors %}
-<div class="container">
-    {% for error in errors %}
-    <div class="row">
-        {{error}}
-    </div>
-    <hr>
-    {% endfor %}
-</div>
-{% endif %}
-
-{% if successes %}
-<p>{{ successes }}</p>
-<hr>
-{% endif %}
 
 
 </body>

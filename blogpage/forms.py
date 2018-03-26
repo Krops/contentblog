@@ -7,7 +7,7 @@ from slugify import slugify
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['theme', 'message', 'rate']
+        fields = ['theme', 'message']
 
     def get_slugified(self):
         instance = super(PostForm, self).save(commit=False)
